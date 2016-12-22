@@ -80,7 +80,7 @@ namespace KodKopyalayici
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
                 p.StartInfo = info;
                 p.Start();
-                p.WaitForExit(); 
+                p.WaitForExit();
             });
 
         }
@@ -103,7 +103,7 @@ namespace KodKopyalayici
                 p.StartInfo = info;
                 p.Start();
                 p.WaitForExit();
-                
+
             });
         }
 
@@ -112,8 +112,12 @@ namespace KodKopyalayici
             string anaDosya, hedefDosya;
             anaDosya = Path.Combine(cmbKaynakKurum.Text, txtDosyaAdi.Text);
             hedefDosya = Path.Combine(cmbHedefKurum.Text, txtDosyaAdi.Text);
-            if(anaDosya != hedefDosya && File.Exists(anaDosya))
-            File.Copy(anaDosya, hedefDosya, false);
+            if (anaDosya != hedefDosya
+                && File.Exists(anaDosya)
+                && File.Exists(hedefDosya) == false)
+            {
+                File.Copy(anaDosya, hedefDosya, false);
+            }
             SonrakiHedef();
         }
     }
