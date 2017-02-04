@@ -46,19 +46,20 @@ namespace KodKopyalayici
         }
         private async void button2_Click(object sender, EventArgs e)
         {
-            string anaDosya, hedefDosya;
-            anaDosya = Path.Combine(cmbKaynakKurum.Text, txtDosyaAdi.Text);
-            hedefDosya = Path.Combine(cmbHedefKurum.Text, txtDosyaAdi.Text);
+            var anaDosya = Path.Combine(cmbKaynakKurum.Text, txtDosyaAdi.Text);
+            var hedefDosya = Path.Combine(cmbHedefKurum.Text, txtDosyaAdi.Text);
 
             await BeyondeCompareDiffAsync(anaDosya, hedefDosya);
             SonrakiHedef();
         }
         public void SonrakiHedef()
         {
+
+
             var index = cmbHedefKurum.SelectedIndex;
             index++;
             var count = cmbHedefKurum.Items.Count;
-            if (index < count)
+            if (index < count && chxSonraki.Checked)
             {
                 cmbHedefKurum.SelectedIndex = index;
             }
