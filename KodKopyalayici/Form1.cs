@@ -37,20 +37,31 @@ namespace KodKopyalayici
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            string anaDosya, hedefDosya;
-            anaDosya = Path.Combine(cmbKaynakKurum.Text, txtDosyaAdi.Text);
-            hedefDosya = Path.Combine(cmbHedefKurum.Text, txtDosyaAdi.Text);
+            var anaDosya = Path.Combine(cmbKaynakKurum.Text, txtDosyaAdi.Text);
+            var hedefDosya = Path.Combine(cmbHedefKurum.Text, txtDosyaAdi.Text);
 
             await TortoiseDiffAsync(anaDosya, hedefDosya);
             SonrakiHedef();
         }
         private async void button2_Click(object sender, EventArgs e)
         {
-            var anaDosya = Path.Combine(cmbKaynakKurum.Text, txtDosyaAdi.Text);
-            var hedefDosya = Path.Combine(cmbHedefKurum.Text, txtDosyaAdi.Text);
 
-            await BeyondeCompareDiffAsync(anaDosya, hedefDosya);
-            SonrakiHedef();
+            var anaDosya = "";
+            var hedefDosya = "";
+            int sonDurak = cmbHedefKurum.Items.Count - 1;
+            do
+            {
+                anaDosya = Path.Combine(cmbKaynakKurum.Text, txtDosyaAdi.Text);
+                hedefDosya = Path.Combine(cmbHedefKurum.Text, txtDosyaAdi.Text);
+                await BeyondeCompareDiffAsync(anaDosya, hedefDosya);
+                
+                if (cmbHedefKurum.SelectedIndex == sonDurak ) // sonuncuya gelene kadar dön dur
+                {
+                    break;
+                }
+                SonrakiHedef();
+            } while (chxSonraki.Checked); //ver elini sonsuz döngü.          
+
         }
         public void SonrakiHedef()
         {
@@ -118,6 +129,34 @@ namespace KodKopyalayici
                 && File.Exists(hedefDosya) == false)
             {
                 File.Copy(anaDosya, hedefDosya, false);
+            }
+            SonrakiHedef();
+        }
+
+        private async void btnNotepadpp_Click(object sender, EventArgs e)
+        {
+            string hedefDosya;
+
+            hedefDosya = Path.Combine(cmbHedefKurum.Text, txtDosyaAdi.Text);
+            if (File.Exists(hedefDosya))
+            {
+                await Task.Run(() =>
+                {
+
+                    //Open Tortoise for show diff
+                    var commandLineArgument = string.Format("{0}",
+                        hedefDosya
+                        );
+
+                    var exeName = @"notepad++";
+
+                    System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(exeName, commandLineArgument);
+                    System.Diagnostics.Process p = new System.Diagnostics.Process();
+                    p.StartInfo = info;
+                    p.Start();
+                    p.WaitForExit();
+
+                });
             }
             SonrakiHedef();
         }

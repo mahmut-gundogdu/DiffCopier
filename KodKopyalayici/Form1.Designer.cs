@@ -38,6 +38,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.chxSonraki = new System.Windows.Forms.CheckBox();
+            this.btnNotepadpp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -130,11 +131,22 @@
             this.chxSonraki.Text = "Sonrakine Geç";
             this.chxSonraki.UseVisualStyleBackColor = true;
             // 
+            // btnNotepadpp
+            // 
+            this.btnNotepadpp.Location = new System.Drawing.Point(770, 173);
+            this.btnNotepadpp.Name = "btnNotepadpp";
+            this.btnNotepadpp.Size = new System.Drawing.Size(114, 23);
+            this.btnNotepadpp.TabIndex = 7;
+            this.btnNotepadpp.Text = "Notepad++ ile aç";
+            this.btnNotepadpp.UseVisualStyleBackColor = true;
+            this.btnNotepadpp.Click += new System.EventHandler(this.btnNotepadpp_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(919, 227);
+            this.Controls.Add(this.btnNotepadpp);
             this.Controls.Add(this.chxSonraki);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.cmbHedefKurum);
@@ -164,6 +176,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox chxSonraki;
+        private System.Windows.Forms.Button btnNotepadpp;
     }
 }
 
