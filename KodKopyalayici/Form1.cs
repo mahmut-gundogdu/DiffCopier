@@ -54,8 +54,8 @@ namespace KodKopyalayici
                 anaDosya = Path.Combine(cmbKaynakKurum.Text, txtDosyaAdi.Text);
                 hedefDosya = Path.Combine(cmbHedefKurum.Text, txtDosyaAdi.Text);
                 await BeyondeCompareDiffAsync(anaDosya, hedefDosya);
-                
-                if (cmbHedefKurum.SelectedIndex == sonDurak ) // sonuncuya gelene kadar dön dur
+
+                if (cmbHedefKurum.SelectedIndex == sonDurak) // sonuncuya gelene kadar dön dur
                 {
                     break;
                 }
@@ -159,6 +159,38 @@ namespace KodKopyalayici
                 });
             }
             SonrakiHedef();
+        }
+
+        private async void btnWinmerge_Click(object sender, EventArgs e)
+        {
+            var anaDosya = Path.Combine(cmbKaynakKurum.Text, txtDosyaAdi.Text);
+            var hedefDosya = Path.Combine(cmbHedefKurum.Text, txtDosyaAdi.Text);
+
+            await WinMergeDiffAsync(anaDosya, hedefDosya);
+            SonrakiHedef();
+        }
+
+        private Task WinMergeDiffAsync(string AnaDosya, string HedefDosya)
+        {
+            return Task.Run(() =>
+            {
+
+                //Open Tortoise for show diff
+                //" / ub /dl \"{0}\" /mine:\"{1}\" /basename:\"Öncesi\" /minename:\"Sonrası\"",
+                var commandLineArgument = string.Format("/ub /dl \"{0}\" /dr \"{1}\" {0} {1}",
+                        AnaDosya,
+                        HedefDosya
+                        );
+
+                var exeName = @"C:\Program Files (x86)\WinMerge\WinMergeU.exe";
+
+                System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(exeName, commandLineArgument);
+                System.Diagnostics.Process p = new System.Diagnostics.Process();
+                p.StartInfo = info;
+                p.Start();
+                p.WaitForExit();
+
+            });
         }
     }
 }

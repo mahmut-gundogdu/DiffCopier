@@ -39,6 +39,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.chxSonraki = new System.Windows.Forms.CheckBox();
             this.btnNotepadpp = new System.Windows.Forms.Button();
+            this.btnWinmerge = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -141,11 +142,22 @@
             this.btnNotepadpp.UseVisualStyleBackColor = true;
             this.btnNotepadpp.Click += new System.EventHandler(this.btnNotepadpp_Click);
             // 
+            // btnWinmerge
+            // 
+            this.btnWinmerge.Location = new System.Drawing.Point(472, 173);
+            this.btnWinmerge.Name = "btnWinmerge";
+            this.btnWinmerge.Size = new System.Drawing.Size(143, 23);
+            this.btnWinmerge.TabIndex = 8;
+            this.btnWinmerge.Text = "WinMerge ile Aç";
+            this.btnWinmerge.UseVisualStyleBackColor = true;
+            this.btnWinmerge.Click += new System.EventHandler(this.btnWinmerge_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(919, 227);
+            this.Controls.Add(this.btnWinmerge);
             this.Controls.Add(this.btnNotepadpp);
             this.Controls.Add(this.chxSonraki);
             this.Controls.Add(this.button3);
@@ -177,6 +189,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox chxSonraki;
         private System.Windows.Forms.Button btnNotepadpp;
+        private System.Windows.Forms.Button btnWinmerge;
     }
 }
 
