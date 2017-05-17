@@ -36,12 +36,28 @@ namespace KodKopyalayici
         }
 
         private async void button1_Click(object sender, EventArgs e)
-        {
-            var anaDosya = Path.Combine(cmbKaynakKurum.Text, txtDosyaAdi.Text);
-            var hedefDosya = Path.Combine(cmbHedefKurum.Text, txtDosyaAdi.Text);
+        { 
 
-            await TortoiseDiffAsync(anaDosya, hedefDosya);
-            SonrakiHedef();
+
+
+
+
+            var anaDosya = "";
+            var hedefDosya = "";
+            int sonDurak = cmbHedefKurum.Items.Count - 1;
+            do
+            {
+                anaDosya = Path.Combine(cmbKaynakKurum.Text, txtDosyaAdi.Text);
+                hedefDosya = Path.Combine(cmbHedefKurum.Text, txtDosyaAdi.Text);
+                await TortoiseDiffAsync(anaDosya, hedefDosya);
+
+                if (cmbHedefKurum.SelectedIndex == sonDurak) // sonuncuya gelene kadar dön dur
+                {
+                    break;
+                }
+                SonrakiHedef();
+            } while (chxSonraki.Checked); //ver elini sonsuz döngü.          
+
         }
         private async void button2_Click(object sender, EventArgs e)
         {
